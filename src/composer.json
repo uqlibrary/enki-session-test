@@ -1,0 +1,12 @@
+{
+  "name": "uqlibrary/enki-test",
+  "description": "Enki Test",
+  "keywords": ["enki", "session", "test"],
+  "license": "MIT",
+  "type": "project",
+  "require": {
+    "php": ">=5.6.4",
+    "guzzlehttp/guzzle": "~6.0",
+    "symfony/var-dumper": "~3.1"
+  }
+}

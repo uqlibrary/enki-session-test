@@ -1,0 +1,32 @@
+version: '2'
+services:
+  app:
+    image: uqlibrary/docker-nginx:10
+    links:
+      - fpm
+    ports:
+      - "8020:80"
+    volumes_from:
+      - fpm
+  fpm:
+    environment:
+      - XDEBUG_CONFIG=idekey=uqlapp-api
+      - PHP_IDE_CONFIG=serverName=dev-uqlais.library.uq.edu.au
+    build: ./fpm
+    links:
+      - session-db
+    volumes:
+      - ./etc/nginx/conf.d:/etc/nginx/conf.d
+      - ../:/var/app/current
+      - ./saml-sp:/tmp/saml-sp
+  session-db:
+    environment:
+      - MYSQL_ROOT_PASSWORD=development
+      - MYSQL_USER=session
+      - MYSQL_PASSWORD=session
+      - MYSQL_DATABASE=session
+    image: mysql:latest
+    ports:
+      - "3311:3306"
+    volumes:
+      - ./session-db:/docker-entrypoint-initdb.d
