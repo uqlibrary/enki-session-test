@@ -8,6 +8,8 @@ services:
       - "8020:80"
     volumes_from:
       - fpm
+    networks:
+      - uqlais_default
   fpm:
     environment:
       - XDEBUG_CONFIG=idekey=uqlapp-api
@@ -19,6 +21,8 @@ services:
       - ./etc/nginx/conf.d:/etc/nginx/conf.d
       - ../:/var/app/current
       - ./saml-sp:/tmp/saml-sp
+    networks:
+      - uqlais_default
   session-db:
     environment:
       - MYSQL_ROOT_PASSWORD=development
@@ -30,3 +34,8 @@ services:
       - "3311:3306"
     volumes:
       - ./session-db:/docker-entrypoint-initdb.d
+    networks:
+      - uqlais_default
+networks:
+  uqlais_default:
+    external: true

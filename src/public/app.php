@@ -9,6 +9,7 @@ require_once '../includes/common1.php';
 echo "SESSION:";
 dump($_SESSION);
 
-$_SESSION['bla'] = 'blathefirst!';
+echo "COOKIE:";
+dump($_COOKIE);
 
 ?>
